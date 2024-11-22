@@ -1,3 +1,3 @@
 <template>
-  <h1>Profile Edit</h1>
+  <h1 class="text-2xl">Edit Profile</h1>
 </template>

@@ -6,7 +6,7 @@ import AppFooter from './components/AppFooter.vue'
 
 <template>
   <AppHeader />
-  <main>
+  <main class="container mx-auto py-8">
     <RouterView />
   </main>
   <AppFooter />
