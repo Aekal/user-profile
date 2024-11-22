@@ -11,11 +11,6 @@ const model = defineModel<string>()
 <template>
   <label class="flex flex-col gap-1.5">
     {{ label }}
-    <input
-      v-bind="$attrs"
-      v-model="model"
-      type="text"
-      class="rounded border p-1.5 text-neutral-700"
-    />
+    <input v-bind="$attrs" v-model="model" class="rounded border p-1.5 text-neutral-700" />
   </label>
 </template>
