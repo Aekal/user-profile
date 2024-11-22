@@ -4,7 +4,7 @@ const { avatarImage, firstName, lastName, email, phone, birthday, about } = useP
 </script>
 
 <template>
-  <h1 class="text-2xl">Profile</h1>
+  <h1 class="mb-8 text-2xl">Profile</h1>
   <div class="flex flex-col items-center py-4">
     <img
       :src="avatarImage"
