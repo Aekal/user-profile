@@ -25,7 +25,7 @@ const { avatarImage, firstName, lastName, email, phone, birthday, about } = useP
       <BaseListItem label="Email" :value="email" />
       <BaseListItem label="Phone" :value="phone" />
       <BaseListItem label="Birthday" :value="birthday" />
-      <BaseListItem label="About" :value="about" />
+      <BaseListItem label="About me" :value="about" />
     </ul>
   </div>
 </template>

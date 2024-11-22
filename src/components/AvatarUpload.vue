@@ -28,7 +28,7 @@ const onUpload = (e: Event) => {
 .avatar-label {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 0.375rem;
 }
 .avatar-input {
   border-radius: 0.25rem;
