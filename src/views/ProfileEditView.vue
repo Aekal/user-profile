@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import BaseInput from '@/components/BaseInput.vue'
 import BaseTextarea from '@/components/BaseTextarea.vue'
 import { useProfileStore } from '@/stores/profile'
+import AvatarUpload from '@/components/AvatarUpload.vue'
 
 const router = useRouter()
 
@@ -19,15 +20,6 @@ const uploadError = ref<boolean>(false)
 
 const createAvatarPreview = (file: Blob) => {
   profileStore.avatarImage = URL.createObjectURL(file)
-}
-const onUpload = (e: Event) => {
-  const file = (e.target as EventTarget & { files: FileList }).files[0]
-  if (file.size > 1024 * 1024) {
-    uploadError.value = true
-    return
-  }
-  uploadError.value = false
-  avatarFile.value = file
 }
 const onSubmit = () => {
   if (uploadError.value) {
@@ -51,16 +43,7 @@ const onSubmit = () => {
 <template>
   <h1 class="mb-8 text-2xl">Edit Profile</h1>
   <form class="mx-auto flex max-w-80 flex-col gap-4" @submit.prevent="onSubmit">
-    <label class="flex flex-col gap-1.5">
-      Avatar
-      <input
-        type="file"
-        class="rounded border p-1.5 text-neutral-100"
-        accept="image/*"
-        @change="onUpload"
-      />
-      <span v-if="uploadError" class="text-sm text-red-500">File size should be less than 1MB</span>
-    </label>
+    <AvatarUpload v-model:avatar-file="avatarFile" v-model:upload-error="uploadError" />
     <BaseInput
       v-model="firstName"
       type="text"
