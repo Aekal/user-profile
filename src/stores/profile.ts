@@ -10,9 +10,6 @@ export const useProfileStore = defineStore('profile', () => {
   const birthday = ref<string>('')
   const about = ref<string>('')
 
-  const uploadAvatar = (file: Blob) => {
-    avatarImage.value = URL.createObjectURL(file)
-  }
   const saveProfileData = (data: {
     firstName: string
     lastName: string
@@ -37,7 +34,6 @@ export const useProfileStore = defineStore('profile', () => {
     phone,
     birthday,
     about,
-    uploadAvatar,
     saveProfileData,
   }
 })

@@ -8,14 +8,34 @@ import { useProfileStore } from '@/stores/profile'
 const router = useRouter()
 
 const profileStore = useProfileStore()
+const avatarFile = ref<Blob>()
 const firstName = ref(profileStore.firstName)
 const lastName = ref(profileStore.lastName)
 const email = ref(profileStore.email)
 const phone = ref(profileStore.phone)
 const birthday = ref(profileStore.birthday)
 const about = ref(profileStore.about)
+const uploadError = ref<boolean>(false)
 
+const createAvatarPreview = (file: Blob) => {
+  profileStore.avatarImage = URL.createObjectURL(file)
+}
+const onUpload = (e: Event) => {
+  const file = (e.target as EventTarget & { files: FileList }).files[0]
+  if (file.size > 1024 * 1024) {
+    uploadError.value = true
+    return
+  }
+  uploadError.value = false
+  avatarFile.value = file
+}
 const onSubmit = () => {
+  if (uploadError.value) {
+    return
+  }
+  if (avatarFile.value) {
+    createAvatarPreview(avatarFile.value)
+  }
   profileStore.saveProfileData({
     firstName: firstName.value,
     lastName: lastName.value,
@@ -31,12 +51,62 @@ const onSubmit = () => {
 <template>
   <h1 class="mb-8 text-2xl">Edit Profile</h1>
   <form class="mx-auto flex max-w-80 flex-col gap-4" @submit.prevent="onSubmit">
-    <BaseInput v-model="firstName" label="First name" placeholder="Joe" />
-    <BaseInput v-model="lastName" label="Last name" placeholder="Doe" />
-    <BaseInput v-model="email" type="email" label="Email" placeholder="joe.doe@example.com" />
-    <BaseInput v-model="phone" label="Phone" placeholder="(123) 456-7890" />
-    <BaseInput v-model="birthday" label="Birthday" placeholder="MM/DD/YYYY" />
-    <BaseTextarea v-model="about" label="About me" placeholder="Tell us about yourself" />
+    <label class="flex flex-col gap-1.5">
+      Avatar
+      <input
+        type="file"
+        class="rounded border p-1.5 text-neutral-100"
+        accept="image/*"
+        @change="onUpload"
+      />
+      <span v-if="uploadError" class="text-sm text-red-500">File size should be less than 1MB</span>
+    </label>
+    <BaseInput
+      v-model="firstName"
+      type="text"
+      label="First name"
+      placeholder="Joe"
+      autocomplete="given-name"
+      required
+    />
+    <BaseInput
+      v-model="lastName"
+      type="text"
+      label="Last name"
+      placeholder="Doe"
+      autocomplete="family-name"
+      required
+    />
+    <BaseInput
+      v-model="email"
+      type="email"
+      label="Email"
+      placeholder="joe.doe@example.com"
+      autocomplete="email"
+      required
+    />
+    <BaseInput
+      v-model="phone"
+      type="text"
+      label="Phone"
+      placeholder="(123) 456-7890"
+      autocomplete="tel"
+      required
+    />
+    <BaseInput
+      v-model="birthday"
+      type="text"
+      label="Birthday"
+      placeholder="MM/DD/YYYY"
+      autocomplete="bday"
+      required
+    />
+    <BaseTextarea
+      v-model="about"
+      label="About me"
+      placeholder="Tell us about yourself"
+      autocomplete="off"
+    />
     <button type="submit" class="mt-2 rounded bg-emerald-800 py-2 hover:bg-emerald-700">
       Save
     </button>
