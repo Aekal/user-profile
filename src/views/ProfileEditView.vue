@@ -1,3 +1,3 @@
 <template>
-  <main>Profile edit view</main>
+  <h1>Profile Edit</h1>
 </template>
