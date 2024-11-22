@@ -1,5 +1,10 @@
-<script setup lang="ts"></script>
-
 <template>
-  <footer>Footer</footer>
+  <footer class="border-t border-neutral-600 absolute bottom-0 w-full py-4">
+    <div class="container mx-auto px-2">
+      <p class="text-center">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. A veritatis porro nostrum sint
+        iure quidem facilis debitis nobis fuga ipsam.
+      </p>
+    </div>
+  </footer>
 </template>
