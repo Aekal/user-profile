@@ -18,15 +18,19 @@ const birthday = ref(profileStore.birthday)
 const about = ref(profileStore.about)
 const uploadError = ref<boolean>(false)
 
-const createAvatarPreview = (file: Blob) => {
-  profileStore.avatarImage = URL.createObjectURL(file)
-}
-const onSubmit = () => {
+const createAvatarPreview = (file: Blob): Promise<string | ArrayBuffer | null> =>
+  new Promise((resolve, reject) => {
+    const fileReader = new FileReader()
+    fileReader.readAsDataURL(file)
+    fileReader.onload = () => resolve(fileReader.result)
+    fileReader.onerror = (error) => reject(error)
+  })
+const onSubmit = async () => {
   if (uploadError.value) {
     return
   }
   if (avatarFile.value) {
-    createAvatarPreview(avatarFile.value)
+    profileStore.avatarImage = await createAvatarPreview(avatarFile.value)
   }
   profileStore.saveProfileData({
     firstName: firstName.value,
