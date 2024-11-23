@@ -4,7 +4,7 @@ import { defineStore } from 'pinia'
 export const useProfileStore = defineStore(
   'profile',
   () => {
-    const avatarImage = ref<string | ArrayBuffer | null>()
+    const avatarImage = ref<string>()
     const firstName = ref<string>('')
     const lastName = ref<string>('')
     const email = ref<string>('')
