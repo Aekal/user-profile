@@ -14,7 +14,7 @@ const model = defineModel<string>()
     <input
       v-bind="$attrs"
       v-model="model"
-      class="rounded border p-1.5 text-neutral-700 placeholder:text-neutral-400"
+      class="w-full rounded border p-1.5 text-neutral-700 placeholder:text-neutral-400"
     />
   </label>
 </template>
