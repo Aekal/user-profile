@@ -14,7 +14,7 @@ const model = defineModel<string>()
     <textarea
       v-bind="$attrs"
       v-model="model"
-      class="rounded border p-1.5 text-neutral-700"
+      class="rounded border p-1.5 text-neutral-700 placeholder:text-neutral-400"
       rows="3"
     />
   </label>

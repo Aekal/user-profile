@@ -11,6 +11,16 @@ const model = defineModel<string>()
 <template>
   <label class="flex flex-col gap-1.5">
     {{ label }}
-    <input v-bind="$attrs" v-model="model" class="rounded border p-1.5 text-neutral-700" />
+    <input
+      v-bind="$attrs"
+      v-model="model"
+      class="rounded border p-1.5 text-neutral-700 placeholder:text-neutral-400"
+    />
   </label>
 </template>
+
+<style scoped>
+input[type='date']:invalid::-webkit-datetime-edit {
+  @apply text-neutral-400;
+}
+</style>

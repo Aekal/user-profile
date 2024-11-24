@@ -74,7 +74,7 @@ const onSubmit = async () => {
     />
     <BaseInput
       v-model="phone"
-      type="text"
+      type="tel"
       label="Phone"
       placeholder="(123) 456-7890"
       autocomplete="tel"
@@ -82,11 +82,12 @@ const onSubmit = async () => {
     />
     <BaseInput
       v-model="birthday"
-      type="text"
+      type="date"
       label="Birthday"
-      placeholder="MM/DD/YYYY"
       autocomplete="bday"
       required
+      class="date-input"
+      :max="new Date().toISOString().split('T')[0]"
     />
     <BaseTextarea
       v-model="about"
